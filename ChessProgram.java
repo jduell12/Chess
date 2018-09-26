@@ -1,18 +1,19 @@
 
+
 import java.awt.*;
 import javax.swing.*;
-
 
 
 
 public class ChessProgram extends JFrame {
 
 	ChessProgram() {
-		super("Chess");
+		super("Chess Program");
+		ChessPiece.readInImages();
 		setSize(800, 600);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		ChessPiece.readInImages();
+		
 
 	}
 
@@ -47,11 +48,34 @@ public class ChessProgram extends JFrame {
 				g.fillRect(x, y, cell_w, cell_h);
 			}
 		}
-
+		
+		//Order of king row on the chess board
+		PieceType [] kingRow = {PieceType.Rook, PieceType.Knight, PieceType.Bishop, PieceType.Queen, PieceType.King, PieceType.Bishop, PieceType.Knight, PieceType.Rook};
+		
+		//draws black pawns on the chess board
 		for (int col = 0; col < 8; col++) {
 			Piece p = new Piece (ColorType.black, PieceType.Pawn, col, 1);
 			p.drawInPosition(g, boardDimensions);
 		}
+		
+		//draws the black king row on the chess board
+		for (int col = 0; col < 8; col++) {
+			Piece p = new Piece (ColorType.black, kingRow[col], col, 0);
+			p.drawInPosition(g, boardDimensions);
+		}
+		
+		//draws white pawns on the chess board
+		for (int col = 0; col < 8; col++) {
+			Piece p = new Piece (ColorType.white, PieceType.Pawn, col, 6);
+			p.drawInPosition(g, boardDimensions);
+		}
+		
+		//draws the white king row on the chess board
+		for (int col = 0; col < 8; col++) {
+			Piece p = new Piece (ColorType.black, kingRow[col], col, 7);
+			p.drawInPosition(g, boardDimensions);
+		}
+		
 
 	}
 
